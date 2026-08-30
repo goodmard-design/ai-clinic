@@ -895,7 +895,7 @@
           <input type="tel" id="bfPhone" placeholder="شماره تماس" required>
         </div>
         <div class="bf-row">
-          <input type="email" id="bfEmail" placeholder="ایمیل (اختیاری)">
+          <input type="email" id="bfEmail" placeholder="ایمیل (برای پاسخ به شما)" required>
           <select id="bfOrgType" required>
             <option value="" disabled selected>نوع سازمان</option>
             <option value="سازمان بزرگ / اداری">سازمان بزرگ / اداری</option>
@@ -1050,10 +1050,14 @@
       localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
     }
     function currentFormData(){
+      const emailVal = document.getElementById('bfEmail').value.trim();
+      const nameVal = document.getElementById('bfName').value.trim();
       return {
-        name: document.getElementById('bfName').value.trim(),
+        name: nameVal,
         phone: document.getElementById('bfPhone').value.trim(),
-        email: document.getElementById('bfEmail').value.trim(),
+        email: emailVal,
+        _replyto: emailVal,
+        _subject: 'درخواست ویزیت جدید - ' + (nameVal || 'بدون نام'),
         orgType: document.getElementById('bfOrgType').value,
         symptoms: document.getElementById('bfSymptoms').value.trim(),
         time: document.getElementById('bfTime').value.trim(),
