@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>دکتر بهروز ضیاء | مطب تخصصی هوش مصنوعی</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F3F8F5;
+    --panel:#FAFDFB;
+    --ink:#0B0F14;
+    --steel:#5B6B7A;
+    --teal:#00C9A7;
+    --teal-glow:#00E5C7;
+    --violet:#6C5CE7;
+    --coral:#FF6857;
+    --line: rgba(11,15,20,0.08);
+    --radius: 18px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth; background:var(--bg);}
+  body{
+    background:transparent;
+    color:var(--ink);
+    font-family:'Vazirmatn', sans-serif;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+    position:relative;
+  }
+  .mono{ font-family:'IBM Plex Mono', monospace; letter-spacing:0.02em; direction:ltr; unicode-bidi:isolate;}
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 28px; }
+
+  /* NAV */
+  nav{
+    position:fixed; top:0; right:0; left:0; z-index:50;
+    background:rgba(245,247,248,0.75);
+    backdrop-filter: blur(14px);
+    border-bottom:1px solid var(--line);
+    transition: box-shadow .3s ease, background .3s ease;
+  }
+  nav.scrolled{ box-shadow:0 8px 24px rgba(11,15,20,0.07); }
+  #scrollProgress{
+    position:fixed; top:0; right:0; height:2px; width:0%; z-index:60;
+    background:linear-gradient(to left, var(--teal), var(--violet));
+  }
+  nav .wrap{ display:flex; align-items:center; justify-content:space-between; height:72px; }
+  .brand{ display:flex; align-items:center; gap:10px; font-weight:700; font-size:17px; }
+  .brand .dot{ width:9px; height:9px; border-radius:50%; background:var(--teal); box-shadow:0 0 0 4px rgba(0,201,167,0.15); animation: dotPulse 2.4s ease-in-out infinite; }
+  @keyframes dotPulse{ 0%,100%{ box-shadow:0 0 0 4px rgba(0,201,167,0.15);} 50%{ box-shadow:0 0 0 8px rgba(0,201,167,0.05);} }
+  .navlinks{ display:flex; gap:32px; font-size:14.5px; color:var(--steel); }
+  .navlinks a{ position:relative; padding-bottom:4px; }
+  .navlinks a::after{ content:''; position:absolute; right:0; bottom:0; width:0; height:1.5px; background:var(--teal); transition:width .25s ease; }
+  .navlinks a:hover{ color:var(--ink); }
+  .navlinks a:hover::after{ width:100%; }
+  .navcta{
+    background:var(--ink); color:#fff; padding:10px 20px; border-radius:100px; font-size:14px; font-weight:500;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .navcta:hover{ transform:translateY(-2px); box-shadow:0 8px 18px rgba(11,15,20,0.25); }
+  @media (max-width:820px){ .navlinks{display:none;} }
+
+  /* HERO */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex; align-items:center;
+    padding-top:110px; padding-bottom:60px;
+  }
+  .hero-grid{
+    display:grid; grid-template-columns: 1.05fr 0.95fr; gap:40px; align-items:center;
+  }
+  @media (max-width:900px){ .hero-grid{ grid-template-columns:1fr; } }
+
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'IBM Plex Mono', monospace; font-size:12.5px; color:var(--teal);
+    background:rgba(0,201,167,0.08); border:1px solid rgba(0,201,167,0.25);
+    padding:7px 14px; border-radius:100px; margin-bottom:22px;
+    direction:ltr;
+  }
+  .eyebrow::before{ content:'●'; font-size:8px; animation:blink 1.6s infinite; }
+  @keyframes blink{ 0%,100%{opacity:1;} 50%{opacity:0.25;} }
+
+  h1{
+    font-size:clamp(34px, 5vw, 58px);
+    line-height:1.18; font-weight:900; letter-spacing:-0.01em;
+    margin-bottom:22px;
+  }
+  h1 .accent{ color:var(--teal); }
+  .lede{
+    font-size:18px; line-height:1.9; color:var(--steel); max-width:520px; margin-bottom:34px;
+  }
+  .cta-row{ display:flex; gap:14px; flex-wrap:wrap; }
+  .btn{
+    padding:15px 28px; border-radius:100px; font-size:15px; font-weight:700; display:inline-flex; align-items:center; gap:8px;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .btn-primary{ background:var(--ink); color:#fff; }
+  .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 10px 24px rgba(11,15,20,0.25); }
+  .btn-ghost{ border:1px solid var(--line); color:var(--ink); }
+  .btn-ghost:hover{ border-color:var(--steel); }
+
+  /* SCAN VISUAL */
+  .scan-box{
+    position:relative; aspect-ratio:1/1; border-radius:24px;
+    background: radial-gradient(circle at 50% 40%, #0F171C 0%, #060A0D 70%);
+    overflow:hidden;
+    border:1px solid rgba(0,0,0,0.4);
+    box-shadow: 0 30px 60px -20px rgba(11,15,20,0.35);
+  }
+  .scan-box canvas{ display:block; width:100%; height:100%; }
+  .scan-sweep{
+    position:absolute; inset:0; pointer-events:none;
+    background:linear-gradient(to bottom, transparent 0%, rgba(0,229,199,0.18) 48%, rgba(0,229,199,0.35) 50%, rgba(0,229,199,0.18) 52%, transparent 100%);
+    background-size:100% 260%;
+    animation: sweep 3.6s linear infinite;
+    mix-blend-mode:screen;
+  }
+  @keyframes sweep{ 0%{ background-position-y:-100%; } 100%{ background-position-y:100%; } }
+  .scan-hud{
+    position:absolute; inset:0; padding:18px; display:flex; flex-direction:column; justify-content:space-between;
+    pointer-events:none;
+  }
+  .hud-row{ display:flex; justify-content:space-between; font-family:'IBM Plex Mono',monospace; font-size:11px; color:rgba(0,229,199,0.75); direction:ltr; }
+  .hud-corner{ width:16px; height:16px; border-color:rgba(0,229,199,0.55); border-style:solid; }
+  .hud-tl{ border-width:2px 0 0 2px; }
+  .hud-br{ border-width:0 2px 2px 0; margin-right:auto; }
+
+  /* VITALS STRIP */
+  .vitals{
+    margin-top:26px; display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
+    background:var(--line); border:1px solid var(--line); border-radius:14px; overflow:hidden;
+  }
+  .vital{ background:var(--panel); padding:16px 14px; }
+  .vital .label{ font-size:11.5px; color:var(--steel); margin-bottom:6px; }
+  .vital .value{ font-family:'IBM Plex Mono',monospace; font-size:20px; font-weight:600; color:var(--ink); direction:ltr; }
+  .vital .value.ok{ color:var(--teal); }
+
+  /* SECTION SHARED */
+  section{ padding:110px 0; position:relative; }
+  .sec-head{ max-width:640px; margin-bottom:60px; }
+  .sec-tag{ font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--violet); direction:ltr; margin-bottom:14px; display:block; }
+  .sec-head h2{ font-size:clamp(26px,3.4vw,38px); font-weight:800; line-height:1.3; }
+  .sec-head p{ color:var(--steel); margin-top:14px; font-size:16px; line-height:1.85; }
+
+  /* SYMPTOMS */
+  .symptom-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; }
+  @media (max-width:900px){ .symptom-grid{ grid-template-columns:repeat(2,1fr);} }
+  .symptom{ background:var(--panel); padding:30px 24px; transition:background .25s ease, transform .25s ease, box-shadow .25s ease; }
+  .symptom:hover{ transform:translateY(-4px); box-shadow:0 14px 28px -14px rgba(11,15,20,0.18); z-index:2; position:relative; }
+  .symptom:hover{ background:#FBFEFD; }
+  .symptom .code{ font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--coral); direction:ltr; margin-bottom:14px; }
+  .symptom h3{ font-size:16.5px; font-weight:700; margin-bottom:10px; line-height:1.5; }
+  .symptom p{ font-size:14px; color:var(--steel); line-height:1.75; }
+
+  /* DIAGNOSIS TIMELINE */
+  .chart{ position:relative; padding-inline-start:0; }
+  .chart-line{
+    position:absolute; top:0; bottom:0; right:23px; width:2px;
+    background:repeating-linear-gradient(to bottom, var(--teal) 0 6px, transparent 6px 12px);
+  }
+  .chart-item{ position:relative; padding-right:64px; padding-bottom:52px; }
+  .chart-item:last-child{ padding-bottom:0; }
+  .chart-node{
+    position:absolute; right:12px; top:2px; width:26px; height:26px; border-radius:50%;
+    background:var(--panel); border:2px solid var(--teal); display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:600; color:var(--teal);
+  }
+  .chart-item h3{ font-size:19px; font-weight:700; margin-bottom:8px; }
+  .chart-item p{ color:var(--steel); font-size:15px; line-height:1.85; max-width:560px; }
+
+  /* PRESCRIPTIONS */
+  .rx-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  @media (max-width:900px){ .rx-grid{ grid-template-columns:1fr; } }
+  .rx-card{
+    background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+    padding:30px 26px; position:relative; overflow:hidden;
+    transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+  }
+  .rx-card:hover{ transform:translateY(-6px); box-shadow:0 20px 40px -18px rgba(11,15,20,0.22); border-color:rgba(0,201,167,0.35); }
+  .rx-card::before{
+    content:'℞'; position:absolute; left:16px; top:8px; font-size:64px; color:rgba(108,92,231,0.06); font-weight:900;
+    transition:transform .4s ease, color .4s ease;
+  }
+  .rx-card:hover::before{ transform:scale(1.15) rotate(-6deg); color:rgba(108,92,231,0.1); }
+  .rx-card h3{ font-size:18px; font-weight:700; margin-bottom:10px; }
+  .rx-card p{ font-size:14.5px; color:var(--steel); line-height:1.8; margin-bottom:18px; }
+  .rx-tag{ display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--violet); background:rgba(108,92,231,0.08); padding:5px 11px; border-radius:100px; direction:ltr; }
+
+  /* CASE FILES */
+  .cases{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden;}
+  @media (max-width:900px){ .cases{ grid-template-columns:1fr; } }
+  .case{ background:var(--panel); padding:28px 24px; }
+  .case .status{ display:inline-flex; align-items:center; gap:6px; font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--teal); margin-bottom:16px; direction:ltr; }
+  .case .status::before{ content:''; width:6px; height:6px; border-radius:50%; background:var(--teal); }
+  .case h3{ font-size:16.5px; font-weight:700; margin-bottom:8px; }
+  .case p{ font-size:14px; color:var(--steel); line-height:1.75; }
+
+  /* BOOKING */
+  .booking{
+    background:var(--ink); color:#fff; border-radius:28px; padding:70px 50px; text-align:center; position:relative; overflow:hidden;
+  }
+  .booking::before{
+    content:''; position:absolute; inset:0;
+    background: radial-gradient(circle at 30% 20%, rgba(0,229,199,0.18), transparent 55%), radial-gradient(circle at 80% 80%, rgba(108,92,231,0.18), transparent 55%);
+  }
+  .booking > *{ position:relative; z-index:1; }
+  .booking h2{ font-size:clamp(26px,3.6vw,40px); font-weight:800; margin-bottom:16px; }
+  .booking p{ color:rgba(255,255,255,0.65); max-width:480px; margin:0 auto 34px; font-size:16px; line-height:1.85; }
+  .booking .btn-primary{ background:var(--teal); color:var(--ink); }
+  .booking .btn-primary:hover{ box-shadow:0 10px 30px rgba(0,229,199,0.35); }
+  .insta{ margin-top:26px; font-family:'IBM Plex Mono',monospace; font-size:13px; color:rgba(255,255,255,0.5); direction:ltr; }
+
+  footer{ padding:36px 0; text-align:center; color:var(--steel); font-size:13px; }
+
+  .reveal{ opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  /* AMBIENT CODE BACKGROUND */
+  #codeBg{
+    position:fixed; inset:0; z-index:-1; pointer-events:none;
+  }
+
+  /* FREE VISIT TERMS */
+  .terms-card{
+    background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+    padding:36px; position:relative;
+  }
+  .terms-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; }
+  @media (max-width:900px){ .terms-grid{ grid-template-columns:1fr; } }
+  .terms-col{ background:var(--panel); padding:32px 28px; transition:background .25s ease; }
+  .terms-col:hover{ background:#FBFEFD; }
+  .terms-col li{ transition:transform .2s ease, color .2s ease; }
+  .terms-col li:hover{ transform:translateX(4px); color:var(--ink); }
+  .terms-col h3{ font-size:16px; font-weight:700; margin-bottom:16px; display:flex; align-items:center; gap:8px; }
+  .terms-col.include h3{ color:var(--teal); }
+  .terms-col.exclude h3{ color:var(--coral); }
+  .terms-col ul{ list-style:none; }
+  .terms-col li{ font-size:14.5px; color:var(--steel); line-height:1.9; padding-right:20px; position:relative; margin-bottom:8px; }
+  .terms-col.include li::before{ content:'✓'; position:absolute; right:0; color:var(--teal); font-weight:700; }
+  .terms-col.exclude li::before{ content:'✕'; position:absolute; right:0; color:var(--coral); font-weight:700; }
+  .terms-note{
+    margin-top:20px; font-size:13.5px; color:var(--steel); background:rgba(0,201,167,0.06);
+    border:1px dashed rgba(0,201,167,0.3); border-radius:12px; padding:14px 18px; line-height:1.8;
+  }
+
+  /* FDE IMPLEMENTATION */
+  .fde-why{
+    background:linear-gradient(135deg, rgba(108,92,231,0.05), rgba(0,201,167,0.05));
+    border:1px solid var(--line); border-radius:var(--radius); padding:32px; margin-bottom:36px;
+  }
+  .fde-why h3{ font-size:17px; font-weight:700; margin-bottom:12px; }
+  .fde-why p{ font-size:15px; color:var(--steel); line-height:1.9; }
+  .fde-stages{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  @media (max-width:900px){ .fde-stages{ grid-template-columns:1fr; } }
+  .fde-stage{
+    background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:26px 22px;
+    position:relative; transition:transform .3s ease, box-shadow .3s ease;
+  }
+  .fde-stage:hover{ transform:translateY(-5px); box-shadow:0 16px 32px -16px rgba(11,15,20,0.2); }
+  .fde-stage .phase{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--violet); direction:ltr; margin-bottom:12px; display:block; }
+  .fde-stage h4{ font-size:16px; font-weight:700; margin-bottom:8px; }
+  .fde-stage p{ font-size:13.5px; color:var(--steel); line-height:1.75; }
+  .fde-arrow{ display:none; }
+  @media (min-width:901px){
+    .fde-stage:not(:last-child)::after{
+      content:'→'; position:absolute; left:-22px; top:50%; transform:translateY(-50%);
+      color:var(--steel); font-size:16px;
+    }
+  }
+
+  /* SWARM SECTION */
+  .swarm-layout{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:48px; align-items:start; }
+  @media (max-width:940px){ .swarm-layout{ grid-template-columns:1fr; } }
+
+  .swarm-diagram{
+    background:#0B0F14; border-radius:24px; padding:30px; position:relative; aspect-ratio:1/0.85;
+    overflow:hidden;
+  }
+  .swarm-diagram svg{ width:100%; height:100%; }
+
+  .swarm-block{ margin-bottom:32px; }
+  .swarm-block:last-child{ margin-bottom:0; }
+  .swarm-block h3{ font-size:17px; font-weight:700; margin-bottom:14px; display:flex; align-items:center; gap:8px; }
+  .swarm-block h3::before{ content:''; width:8px; height:8px; border-radius:2px; background:var(--violet); transform:rotate(45deg); }
+  .swarm-block ul{ list-style:none; }
+  .swarm-block li{ font-size:14.5px; color:var(--steel); line-height:1.85; padding-right:20px; position:relative; margin-bottom:9px; }
+  .swarm-block li::before{ content:'—'; position:absolute; right:0; color:var(--teal); }
+
+  .swarm-flow{ display:flex; flex-direction:column; gap:0; margin-top:8px; }
+  .swarm-flow-step{ display:flex; align-items:flex-start; gap:14px; padding:14px 10px; margin:0 -10px; border-bottom:1px solid var(--line); border-radius:10px; transition:background .2s ease, transform .2s ease; }
+  .swarm-flow-step:hover{ background:rgba(0,201,167,0.05); transform:translateX(3px); }
+  .swarm-flow-step:hover .swarm-flow-num{ background:var(--teal); color:#0B0F14; border-color:var(--teal); }
+  .swarm-flow-num{ transition:background .2s ease, color .2s ease; }
+
+  /* DIGITAL EMPLOYEE DEMO */
+  .de-intro{
+    background:linear-gradient(135deg, rgba(0,201,167,0.06), rgba(108,92,231,0.05));
+    border:1px solid var(--line); border-radius:var(--radius); padding:30px 32px; margin-bottom:40px;
+  }
+  .de-intro p{ font-size:15px; color:var(--steel); line-height:1.9; }
+  .de-demo{ background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:32px; }
+  .de-demo-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:24px; flex-wrap:wrap; gap:12px; }
+  .de-demo-head h3{ font-size:16px; font-weight:700; }
+  .de-play{
+    display:inline-flex; align-items:center; gap:8px; font-family:'IBM Plex Mono',monospace; font-size:12.5px;
+    background:var(--ink); color:#fff; padding:9px 16px; border-radius:100px; cursor:pointer; border:none; direction:ltr;
+    transition:transform .2s ease;
+  }
+  .de-play:hover{ transform:translateY(-2px); }
+  .de-play .pd{ width:7px; height:7px; border-radius:50%; background:var(--teal); }
+
+  .de-cols{ display:grid; grid-template-columns:1fr 1fr; gap:22px; margin-bottom:30px; }
+  @media (max-width:820px){ .de-cols{ grid-template-columns:1fr; } }
+  .de-col-title{ font-size:13px; font-weight:700; margin-bottom:14px; display:flex; align-items:center; gap:8px; }
+  .de-col.manual .de-col-title{ color:var(--coral); }
+  .de-col.ai .de-col-title{ color:var(--teal); }
+  .de-step{
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    padding:13px 14px; border-radius:12px; border:1px solid var(--line); margin-bottom:8px;
+    transition:background .3s ease, border-color .3s ease, transform .3s ease;
+  }
+  .de-step .de-label{ font-size:13.5px; color:var(--steel); }
+  .de-step .de-time{ font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--steel); direction:ltr; flex-shrink:0; }
+  .de-col.manual .de-step.active{ background:rgba(255,104,87,0.08); border-color:rgba(255,104,87,0.35); transform:translateX(-3px); }
+  .de-col.manual .de-step.active .de-label{ color:var(--ink); font-weight:600; }
+  .de-col.ai .de-step.active{ background:rgba(0,201,167,0.08); border-color:rgba(0,201,167,0.4); transform:translateX(3px); }
+  .de-col.ai .de-step.active .de-label{ color:var(--ink); font-weight:600; }
+  .de-col.ai .de-step.active .de-time{ color:var(--teal); font-weight:700; }
+
+  .de-bars{ border-top:1px solid var(--line); padding-top:26px; }
+  .de-bar-row{ display:flex; align-items:center; gap:16px; margin-bottom:14px; }
+  .de-bar-row:last-child{ margin-bottom:0; }
+  .de-bar-label{ font-size:13px; color:var(--steel); width:110px; flex-shrink:0; }
+  .de-bar-track{ flex:1; height:10px; background:var(--line); border-radius:100px; overflow:hidden; }
+  .de-bar-fill{ height:100%; border-radius:100px; width:0%; transition:width 1.4s cubic-bezier(.2,.8,.2,1); }
+  .de-bar-fill.manual{ background:var(--coral); }
+  .de-bar-fill.ai{ background:var(--teal); }
+  .de-bar-value{ font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--ink); width:66px; text-align:left; direction:ltr; flex-shrink:0; }
+  .de-result{
+    margin-top:22px; text-align:center; font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--violet);
+    background:rgba(108,92,231,0.06); border:1px dashed rgba(108,92,231,0.3); border-radius:12px; padding:14px; direction:ltr;
+  }
+
+  /* WORKFLOW LIVE MODE */
+  .wf-stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; margin-bottom:40px; }
+  @media (max-width:820px){ .wf-stats{ grid-template-columns:repeat(2,1fr); } }
+  .wf-stat{ background:var(--panel); padding:20px 18px; }
+  .wf-stat .label{ font-size:12px; color:var(--steel); margin-bottom:8px; }
+  .wf-stat .value{ font-family:'IBM Plex Mono',monospace; font-size:24px; font-weight:700; color:var(--ink); direction:ltr; }
+  .wf-stat .value.teal{ color:var(--teal); }
+
+  .wf-flow{ position:relative; background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:34px 24px 26px; margin-bottom:36px; overflow:hidden; }
+  .wf-flow-line{ position:relative; height:2px; background:var(--line); margin:0 30px; }
+  .wf-flow-pulse{ position:absolute; top:50%; right:0; width:9px; height:9px; margin-top:-4.5px; border-radius:50%; background:var(--teal); box-shadow:0 0 10px 2px rgba(0,201,167,0.6); animation: flowPulse 4.5s linear infinite; }
+  @keyframes flowPulse{ 0%{ right:0%; opacity:0; } 8%{ opacity:1; } 92%{ opacity:1; } 100%{ right:100%; opacity:0; } }
+  .wf-flow-nodes{ display:flex; justify-content:space-between; margin-top:-13px; }
+  .wf-flow-node{ display:flex; flex-direction:column; align-items:center; gap:8px; width:80px; }
+  .wf-flow-dot{ width:26px; height:26px; border-radius:50%; background:var(--panel); border:2px solid var(--teal); display:flex; align-items:center; justify-content:center; font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--teal); }
+  .wf-flow-node span.lbl{ font-size:11.5px; color:var(--steel); text-align:center; }
+
+  .wf-board{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+  @media (max-width:900px){ .wf-board{ grid-template-columns:1fr 1fr; } }
+  @media (max-width:560px){ .wf-board{ grid-template-columns:1fr; } }
+  .wf-col{ background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:16px; min-height:220px; transition:box-shadow .3s ease; }
+  .wf-col:hover{ box-shadow:0 12px 24px -14px rgba(11,15,20,0.15); }
+  .wf-col-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
+  .wf-col-head h4{ font-size:13px; font-weight:700; }
+  .wf-col-count{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--steel); background:var(--bg); border-radius:100px; padding:2px 9px; }
+  .wf-cards{ display:flex; flex-direction:column; gap:8px; min-height:40px; }
+  .wf-card{
+    background:var(--bg); border:1px solid var(--line); border-radius:10px; padding:10px 12px; font-size:12.5px;
+    color:var(--ink); transition: transform .5s cubic-bezier(.2,.8,.2,1), opacity .4s ease, background .3s ease;
+  }
+  .wf-card .id{ font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--violet); display:block; margin-bottom:3px; direction:ltr; }
+  .wf-card.moving{ opacity:0.3; transform:scale(0.9); }
+  .wf-col[data-col="3"] .wf-card{ border-color:rgba(0,201,167,0.35); }
+  .wf-col[data-col="3"] .wf-card .id{ color:var(--teal); }
+
+  /* BOOKING FORM */
+  .booking-form{ margin-top:38px; text-align:right; max-width:640px; margin-inline:auto; display:grid; gap:14px; }
+  .bf-row{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  @media (max-width:600px){ .bf-row{ grid-template-columns:1fr; } }
+  .booking-form input, .booking-form select, .booking-form textarea{
+    width:100%; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.16); border-radius:12px;
+    padding:13px 16px; color:#fff; font-family:'Vazirmatn',sans-serif; font-size:14.5px; transition:border-color .2s ease, box-shadow .2s ease;
+  }
+  .booking-form select option{ color:#111; }
+  .booking-form textarea{ min-height:90px; resize:vertical; }
+  .booking-form ::placeholder{ color:rgba(255,255,255,0.4); }
+  .booking-form input:focus, .booking-form select:focus, .booking-form textarea:focus{
+    outline:none; border-color:var(--teal); box-shadow:0 0 0 3px rgba(0,201,167,0.18);
+  }
+  .bf-actions{ display:flex; gap:12px; flex-wrap:wrap; margin-top:6px; }
+  .bf-submit{
+    background:var(--teal); color:var(--ink); border:none; padding:14px 26px; border-radius:100px; font-weight:700; font-size:14.5px;
+    cursor:pointer; transition:transform .2s ease, box-shadow .2s ease; font-family:'Vazirmatn',sans-serif;
+  }
+  .bf-submit:hover{ transform:translateY(-2px); box-shadow:0 10px 24px rgba(0,229,199,0.3); }
+  .bf-mail{
+    background:transparent; color:rgba(255,255,255,0.85); border:1px solid rgba(255,255,255,0.25); padding:14px 22px; border-radius:100px;
+    font-size:14px; cursor:pointer; font-family:'Vazirmatn',sans-serif;
+  }
+  .bf-success{
+    display:none; margin-top:10px; padding:14px 16px; border-radius:12px; background:rgba(0,201,167,0.12); border:1px solid rgba(0,201,167,0.35);
+    color:#7FF1DD; font-size:13.5px; text-align:center;
+  }
+  .bf-success.show{ display:block; }
+
+  .bf-admin-toggle{
+    margin-top:20px; background:none; border:none; color:rgba(255,255,255,0.45); font-size:12.5px; cursor:pointer;
+    text-decoration:underline; font-family:'IBM Plex Mono',monospace; direction:ltr;
+  }
+  .bf-admin{ display:none; margin-top:20px; background:#fff; border-radius:16px; padding:22px; text-align:right; color:var(--ink); }
+  .bf-admin.show{ display:block; }
+  .bf-admin table{ width:100%; border-collapse:collapse; font-size:12.5px; }
+  .bf-admin th, .bf-admin td{ padding:8px 6px; border-bottom:1px solid var(--line); text-align:right; }
+  .bf-admin th{ color:var(--steel); font-weight:600; font-size:11.5px; }
+  .bf-admin-actions{ display:flex; gap:10px; margin-top:14px; }
+  .bf-admin-actions button{
+    font-family:'IBM Plex Mono',monospace; font-size:11.5px; padding:8px 14px; border-radius:100px; cursor:pointer; border:1px solid var(--line); background:var(--bg);
+  }
+  .bf-empty{ color:var(--steel); font-size:13px; text-align:center; padding:16px 0; }
+  .swarm-flow-step:last-child{ border-bottom:none; }
+  .swarm-flow-num{
+    font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--teal); font-weight:700;
+    width:26px; height:26px; border-radius:50%; border:1px solid rgba(0,201,167,0.35); display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .swarm-flow-text{ font-size:14.5px; color:var(--steel); line-height:1.8; padding-top:3px; }
+  .swarm-flow-text b{ color:var(--ink); }
+</style>
+</head>
+<body>
+<canvas id="codeBg"></canvas>
+<div id="scrollProgress"></div>
+
+<nav>
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span> دکتر بهروز ضیاء</div>
+    <div class="navlinks">
+      <a href="#symptoms">علائم</a>
+      <a href="#diagnosis">تشخیص</a>
+      <a href="#rx">نسخه</a>
+      <a href="#swarm">Swarm</a>
+      <a href="#digital-employee">کارمند دیجیتال</a>
+      <a href="#workflow">Workflow</a>
+      <a href="#terms">شرایط ویزیت</a>
+      <a href="#fde">FDE</a>
+    </div>
+    <a href="#booking" class="navcta">دریافت نوبت</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">SYSTEM.DIAGNOSTIC.READY</div>
+      <h1>وقتی کسب‌وکار شما<br>علائم <span class="accent">عقب‌ماندگی هوشمند</span> دارد</h1>
+      <p class="lede">مطب تخصصی تشخیص و درمان مشکلات هوش مصنوعی. قبل از تجویز راه‌حل، معاینه دقیق زیرساخت، داده و فرآیندهای شما انجام می‌شود — نه یک نسخه‌ی آماده برای همه.</p>
+      <div class="cta-row">
+        <a href="#booking" class="btn btn-primary">شروع معاینه رایگان →</a>
+        <a href="#diagnosis" class="btn btn-ghost">روند تشخیص را ببین</a>
+      </div>
+
+      <div class="vitals">
+        <div class="vital"><div class="label">دقت تشخیص</div><div class="value ok mono">98.2%</div></div>
+        <div class="vital"><div class="label">سابقه پرونده</div><div class="value mono">+40 CASE</div></div>
+        <div class="vital"><div class="label">زمان بازگشت سرمایه</div><div class="value mono">~ 90D</div></div>
+      </div>
+    </div>
+
+    <div class="scan-box" id="scanBox">
+      <div class="scan-hud">
+        <div class="hud-row"><span>NEURAL SCAN</span><span id="scanClock">00:00:00</span></div>
+        <div class="hud-row" style="align-self:flex-end; width:100%;">
+          <div class="hud-corner hud-tl"></div>
+        </div>
+      </div>
+      <div class="scan-sweep"></div>
+    </div>
+  </div>
+</header>
+
+<section id="symptoms">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">// SYMPTOMS.LOG</span>
+      <h2>علائمی که بیمار باید گزارش بدهد</h2>
+      <p>اگر حداقل دو مورد از این علائم را در سازمان خود مشاهده می‌کنید، وقت معاینه رسیده است.</p>
+    </div>
+    <div class="symptom-grid reveal">
+      <div class="symptom">
+        <div class="code">SX-01</div>
+        <h3>کندی مزمن در تصمیم‌گیری</h3>
+        <p>گزارش‌ها دستی تهیه می‌شوند و تصمیم‌ها هفته‌ها طول می‌کشد.</p>
+      </div>
+      <div class="symptom">
+        <div class="code">SX-02</div>
+        <h3>داده‌های پراکنده و بی‌ارتباط</h3>
+        <p>اطلاعات در فایل‌های جدا افتاده، بدون یک مغز مرکزی برای تحلیل.</p>
+      </div>
+      <div class="symptom">
+        <div class="code">SX-03</div>
+        <h3>خستگی از کارهای تکراری</h3>
+        <p>نیروی انسانی زمان خود را صرف کارهایی می‌کند که باید خودکار باشند.</p>
+      </div>
+      <div class="symptom">
+        <div class="code">SX-04</div>
+        <h3>عدم شخصی‌سازی برای مخاطب</h3>
+        <p>محتوا و خدمات برای همه یکسان است، نه متناسب با هر مشتری.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="diagnosis">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">// DIAGNOSIS.PROTOCOL</span>
+      <h2>روند تشخیص، مثل یک ویزیت واقعی</h2>
+    </div>
+    <div class="chart reveal">
+      <div class="chart-line"></div>
+      <div class="chart-item">
+        <div class="chart-node mono">01</div>
+        <h3>مصاحبه اولیه</h3>
+        <p>گفتگوی مستقیم درباره فرآیندها، تیم و اهدافی که سازمان شما دنبال می‌کند.</p>
+      </div>
+      <div class="chart-item">
+        <div class="chart-node mono">02</div>
+        <h3>معاینه زیرساخت</h3>
+        <p>بررسی داده‌ها، ابزارها و نقاطی که هوش مصنوعی می‌تواند مستقیماً اثرگذار باشد.</p>
+      </div>
+      <div class="chart-item">
+        <div class="chart-node mono">03</div>
+        <h3>تشخیص دقیق</h3>
+        <p>یک گزارش شفاف از مشکلات واقعی، بدون اغراق و بدون فروش راه‌حل‌های غیرضروری.</p>
+      </div>
+      <div class="chart-item">
+        <div class="chart-node mono">04</div>
+        <h3>نسخه درمانی</h3>
+        <p>یک برنامه اجرایی مشخص، همراه با ابزار و آموزش لازم برای اجرای آن.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="rx">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">// PRESCRIPTION.RX</span>
+      <h2>نسخه‌هایی که تجویز می‌شود</h2>
+      <p>از مشاوره‌ی پایه تا پیاده‌سازی تخصصی مدل‌ها و معماری‌های چندعاملی — متناسب با شدت «بیماری» هر سازمان.</p>
+    </div>
+    <div class="rx-grid reveal">
+      <div class="rx-card">
+        <span class="rx-tag">CONSULTING</span>
+        <h3 style="margin-top:16px;">مشاوره تخصصی IT و AI</h3>
+        <p>برای سازمان‌های آموزشی، اداری و تجاری؛ از تحلیل مشکل تا طراحی نقشه‌راه فناوری.</p>
+      </div>
+      <div class="rx-card">
+        <span class="rx-tag">TUTORING</span>
+        <h3 style="margin-top:16px;">تدریس خصوصی و آموزش تیمی</h3>
+        <p>آموزش حضوری و آنلاین، از سطح مقدماتی IT تا آموزش تخصصی تیم‌های فنی برای کار با مدل‌های هوش مصنوعی.</p>
+      </div>
+      <div class="rx-card">
+        <span class="rx-tag">SWARM AI</span>
+        <h3 style="margin-top:16px;">معماری چندعاملی (Swarm / Multi-Agent)</h3>
+        <p>طراحی و پیاده‌سازی گروهی از عامل‌های هوشمند که به‌صورت هماهنگ، وظایف پیچیده‌ی سازمانی را بین خودشان تقسیم و اجرا می‌کنند.</p>
+        <a href="#swarm" style="display:inline-block; margin-top:6px; font-size:13px; color:var(--violet); font-weight:600;">جزئیات بیشتر ↓</a>
+      </div>
+      <div class="rx-card">
+        <span class="rx-tag">DATA / MDM</span>
+        <h3 style="margin-top:16px;">مدیریت و یکپارچه‌سازی اطلاعات</h3>
+        <p>ساماندهی داده‌های پراکنده، طراحی پایگاه‌داده و پایپ‌لاین اطلاعاتی که مدل‌های هوش مصنوعی روی آن به‌درستی کار کنند.</p>
+      </div>
+      <div class="rx-card">
+        <span class="rx-tag">MODEL OPS</span>
+        <h3 style="margin-top:16px;">آموزش و استقرار مدل‌ها</h3>
+        <p>فاین‌تیون، ارزیابی و استقرار مدل‌های زبانی و یادگیری ماشین، متناسب با داده و زیرساخت واقعی سازمان.</p>
+      </div>
+      <div class="rx-card">
+        <span class="rx-tag">RAG / KB</span>
+        <h3 style="margin-top:16px;">سیستم‌های پرسش‌وپاسخ هوشمند</h3>
+        <p>اتصال مدل‌های زبانی به اسناد و دانش داخلی سازمان (RAG) برای پاسخ‌های دقیق و مبتنی بر واقعیت سازمان.</p>
+      </div>
+      <div class="rx-card">
+        <span class="rx-tag">AUTOMATION</span>
+        <h3 style="margin-top:16px;">خودکارسازی فرآیندهای اداری</h3>
+        <p>حذف کارهای تکراری تیم‌ها با گردش‌کار هوشمند، از پردازش اسناد تا تولید گزارش خودکار.</p>
+      </div>
+      <div class="rx-card">
+        <span class="rx-tag">BUILD</span>
+        <h3 style="margin-top:16px;">ساخت پلتفرم‌های هوشمند سفارشی</h3>
+        <p>از پلتفرم تولید محتوا تا سیستم‌های OCR و LMS، طراحی‌شده دقیقاً برای نیاز سازمان شما.</p>
+      </div>
+      <div class="rx-card">
+        <span class="rx-tag">SECURITY</span>
+        <h3 style="margin-top:16px;">حاکمیت و امنیت داده در پروژه‌های AI</h3>
+        <p>بررسی ریسک، کنترل دسترسی و رعایت الزامات امنیتی هنگام اتصال هوش مصنوعی به داده‌های حساس سازمان.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="swarm">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">// SWARM.ARCHITECTURE</span>
+      <h2>معماری چندعاملی (Swarm Intelligence)</h2>
+      <p>به‌جای یک مدل واحد که همه‌کاره باشد، گروهی از عامل‌های تخصصی ساخته می‌شود که هرکدام یک نقش مشخص دارند و زیر نظر یک هماهنگ‌کننده با هم همکاری می‌کنند.</p>
+    </div>
+
+    <div class="swarm-layout reveal">
+      <div class="swarm-diagram">
+        <svg viewBox="0 0 400 340" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="dot" markerWidth="4" markerHeight="4" refX="2" refY="2"><circle cx="2" cy="2" r="1.6" fill="#00E5C7"/></marker>
+          </defs>
+          <!-- connecting lines -->
+          <g stroke="rgba(0,229,199,0.35)" stroke-width="1.4">
+            <line x1="200" y1="170" x2="200" y2="55"/>
+            <line x1="200" y1="170" x2="95" y2="105"/>
+            <line x1="200" y1="170" x2="305" y2="105"/>
+            <line x1="200" y1="170" x2="95" y2="255"/>
+            <line x1="200" y1="170" x2="305" y2="255"/>
+            <line x1="200" y1="170" x2="200" y2="290"/>
+          </g>
+          <!-- orchestrator -->
+          <circle cx="200" cy="170" r="34" fill="#0F171C" stroke="#00E5C7" stroke-width="2"/>
+          <text x="200" y="166" text-anchor="middle" fill="#00E5C7" font-family="IBM Plex Mono, monospace" font-size="10">ORCHESTRATOR</text>
+          <text x="200" y="180" text-anchor="middle" fill="#7FF1DD" font-family="IBM Plex Mono, monospace" font-size="9">هماهنگ‌کننده</text>
+
+          <!-- agent nodes -->
+          <g font-family="IBM Plex Mono, monospace" font-size="9.5" text-anchor="middle">
+            <circle cx="200" cy="55" r="26" fill="#0F171C" stroke="#6C5CE7" stroke-width="1.6"/>
+            <text x="200" y="52" fill="#B7ACFF">RESEARCH</text><text x="200" y="63" fill="#8f97a3" font-size="8.5">جمع‌آوری داده</text>
+
+            <circle cx="95" cy="105" r="26" fill="#0F171C" stroke="#6C5CE7" stroke-width="1.6"/>
+            <text x="95" y="102" fill="#B7ACFF">ANALYZE</text><text x="95" y="113" font-size="8.5" fill="#8f97a3">تحلیل</text>
+
+            <circle cx="305" cy="105" r="26" fill="#0F171C" stroke="#6C5CE7" stroke-width="1.6"/>
+            <text x="305" y="102" fill="#B7ACFF">PLAN</text><text x="305" y="113" font-size="8.5" fill="#8f97a3">برنامه‌ریزی</text>
+
+            <circle cx="95" cy="255" r="26" fill="#0F171C" stroke="#00C9A7" stroke-width="1.6"/>
+            <text x="95" y="252" fill="#7FF1DD">EXECUTE</text><text x="95" y="263" font-size="8.5" fill="#8f97a3">اجرا</text>
+
+            <circle cx="305" cy="255" r="26" fill="#0F171C" stroke="#00C9A7" stroke-width="1.6"/>
+            <text x="305" y="252" fill="#7FF1DD">REVIEW</text><text x="305" y="263" font-size="8.5" fill="#8f97a3">بازبینی</text>
+
+            <circle cx="200" cy="290" r="26" fill="#0F171C" stroke="#FF6857" stroke-width="1.6"/>
+            <text x="200" y="287" fill="#FFB3A6">REPORT</text><text x="200" y="298" font-size="8.5" fill="#8f97a3">گزارش</text>
+          </g>
+        </svg>
+      </div>
+
+      <div>
+        <div class="swarm-block">
+          <h3>چه زمانی به Swarm نیاز دارید؟</h3>
+          <ul>
+            <li>وظیفه‌ای که به چند مرحله‌ی تخصصی متفاوت نیاز دارد (تحقیق، تحلیل، تصمیم، اجرا)</li>
+            <li>حجم بالای درخواست‌های هم‌زمان که یک مدل تنها نمی‌تواند به‌موقع پاسخ دهد</li>
+            <li>فرآیندهایی که باید هم‌زمان چند منبع داده را بررسی و مقایسه کنند</li>
+            <li>نیاز به بازبینی و کنترل کیفیت خودکار قبل از تحویل نتیجه</li>
+          </ul>
+        </div>
+        <div class="swarm-block">
+          <h3>مزیت نسبت به یک مدل واحد</h3>
+          <ul>
+            <li>هر عامل فقط یک وظیفه را یاد می‌گیرد و در آن دقیق‌تر عمل می‌کند</li>
+            <li>خطای یک عامل توسط عامل بازبین شناسایی و اصلاح می‌شود</li>
+            <li>مقیاس‌پذیری ساده‌تر: افزودن عامل جدید بدون بازطراحی کل سیستم</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-head reveal" style="margin-top:60px; margin-bottom:24px;">
+      <span class="sec-tag">// SAMPLE.WORKFLOW</span>
+      <h2 style="font-size:22px;">یک نمونه‌ی ساده از جریان کار</h2>
+    </div>
+    <div class="terms-card reveal">
+      <div class="swarm-flow">
+        <div class="swarm-flow-step">
+          <div class="swarm-flow-num mono">1</div>
+          <div class="swarm-flow-text"><b>هماهنگ‌کننده</b> درخواست ورودی (مثلاً یک تیکت مشتری یا یک پرونده) را دریافت و بین عامل‌های مناسب تقسیم می‌کند.</div>
+        </div>
+        <div class="swarm-flow-step">
+          <div class="swarm-flow-num mono">2</div>
+          <div class="swarm-flow-text"><b>عامل تحقیق و تحلیل</b> اطلاعات لازم را از منابع داخلی سازمان جمع‌آوری و پردازش می‌کند.</div>
+        </div>
+        <div class="swarm-flow-step">
+          <div class="swarm-flow-num mono">3</div>
+          <div class="swarm-flow-text"><b>عامل برنامه‌ریزی</b> بر اساس تحلیل، یک راه‌حل یا پاسخ پیشنهادی می‌سازد.</div>
+        </div>
+        <div class="swarm-flow-step">
+          <div class="swarm-flow-num mono">4</div>
+          <div class="swarm-flow-text"><b>عامل اجرا</b> راه‌حل را در سیستم واقعی (ایمیل، پایگاه‌داده، پنل مدیریت) پیاده می‌کند.</div>
+        </div>
+        <div class="swarm-flow-step">
+          <div class="swarm-flow-num mono">5</div>
+          <div class="swarm-flow-text"><b>عامل بازبین</b> خروجی را از نظر صحت و کیفیت بررسی می‌کند؛ در صورت ایراد، کار به مرحله‌ی قبل بازمی‌گردد.</div>
+        </div>
+        <div class="swarm-flow-step">
+          <div class="swarm-flow-num mono">6</div>
+          <div class="swarm-flow-text"><b>گزارش نهایی</b> برای تیم انسانی یا مدیر سازمان ارسال می‌شود.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="digital-employee">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">// DIGITAL.EMPLOYEE</span>
+      <h2>پروژه کارمند دیجیتال</h2>
+      <p>یک عامل هوشمند که نقش یک کارمند واقعی را ایفا می‌کند: درخواست را می‌خواند، اطلاعات لازم را بررسی می‌کند، بر اساس سیاست‌های سازمان تصمیم می‌گیرد و فقط در تصمیم‌های حساس، تایید نهایی را از انسان می‌گیرد.</p>
+    </div>
+
+    <div class="de-intro reveal">
+      <p>برخلاف یک ابزار خودکارسازی ساده که فقط یک قانون ثابت را اجرا می‌کند، کارمند دیجیتال به ابزارها و داده‌های داخلی سازمان متصل است و می‌تواند مثل یک نیروی واقعی، در طول فرآیند تصمیم بگیرد و مسیر را عوض کند — با این تفاوت که در چند ثانیه کار می‌کند، نه چند ساعت.</p>
+    </div>
+
+    <div class="de-demo reveal">
+      <div class="de-demo-head">
+        <h3>دمو: رسیدگی به یک درخواست مشتری</h3>
+        <button class="de-play mono" id="dePlayBtn"><span class="pd" id="dePd"></span> <span id="dePlayText">در حال پخش دمو</span></button>
+      </div>
+
+      <div class="de-cols">
+        <div class="de-col manual">
+          <div class="de-col-title">فرآیند سنتی (کارمند انسانی)</div>
+          <div class="de-step" data-step="0"><span class="de-label">دریافت و خواندن درخواست</span><span class="de-time mono">۵ دقیقه</span></div>
+          <div class="de-step" data-step="1"><span class="de-label">بررسی سوابق مشتری</span><span class="de-time mono">۱۵ دقیقه</span></div>
+          <div class="de-step" data-step="2"><span class="de-label">تطبیق با سیاست‌های سازمان</span><span class="de-time mono">۲۰ دقیقه</span></div>
+          <div class="de-step" data-step="3"><span class="de-label">تهیه پیش‌نویس پاسخ</span><span class="de-time mono">۲۰ دقیقه</span></div>
+          <div class="de-step" data-step="4"><span class="de-label">تایید نهایی مسئول</span><span class="de-time mono">۱۰ دقیقه</span></div>
+          <div class="de-step" data-step="5"><span class="de-label">ثبت و بایگانی</span><span class="de-time mono">۸ دقیقه</span></div>
+        </div>
+        <div class="de-col ai">
+          <div class="de-col-title">با کارمند دیجیتال</div>
+          <div class="de-step" data-step="0"><span class="de-label">دریافت و خواندن درخواست</span><span class="de-time mono">آنی</span></div>
+          <div class="de-step" data-step="1"><span class="de-label">بررسی سوابق مشتری</span><span class="de-time mono">۸ ثانیه</span></div>
+          <div class="de-step" data-step="2"><span class="de-label">تطبیق با سیاست‌های سازمان</span><span class="de-time mono">۵ ثانیه</span></div>
+          <div class="de-step" data-step="3"><span class="de-label">تهیه پیش‌نویس پاسخ</span><span class="de-time mono">۱۰ ثانیه</span></div>
+          <div class="de-step" data-step="4"><span class="de-label">تایید نهایی مسئول (انسان)</span><span class="de-time mono">۲ دقیقه</span></div>
+          <div class="de-step" data-step="5"><span class="de-label">ثبت و بایگانی</span><span class="de-time mono">آنی</span></div>
+        </div>
+      </div>
+
+      <div class="de-bars">
+        <div class="de-bar-row">
+          <div class="de-bar-label">فرآیند سنتی</div>
+          <div class="de-bar-track"><div class="de-bar-fill manual" id="deBarManual"></div></div>
+          <div class="de-bar-value mono">۷۸ min</div>
+        </div>
+        <div class="de-bar-row">
+          <div class="de-bar-label">کارمند دیجیتال</div>
+          <div class="de-bar-track"><div class="de-bar-fill ai" id="deBarAi"></div></div>
+          <div class="de-bar-value mono">~2 min</div>
+        </div>
+      </div>
+      <div class="de-result">RESULT → ~97% REDUCTION IN CYCLE TIME · HUMAN ONLY FOR FINAL APPROVAL</div>
+    </div>
+  </div>
+</section>
+
+<section id="workflow">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">// LIVE.WORKFLOW.MODE</span>
+      <h2>حالت زنده: مدیریت فرآیندها</h2>
+      <p>نمایی از یک سامانه‌ی واقعی مدیریت فرآیند — جایی که هوش مصنوعی جریان کار سازمان را لحظه‌به‌لحظه رصد، هدایت و بهینه می‌کند.</p>
+    </div>
+
+    <div class="wf-stats reveal">
+      <div class="wf-stat"><div class="label">فرآیندهای فعال</div><div class="value mono" id="wfActive">0</div></div>
+      <div class="wf-stat"><div class="label">تکمیل‌شده امروز</div><div class="value teal mono" id="wfDone">0</div></div>
+      <div class="wf-stat"><div class="label">میانگین زمان چرخه</div><div class="value mono">4.2m</div></div>
+      <div class="wf-stat"><div class="label">بهره‌وری فرآیند</div><div class="value teal mono">94%</div></div>
+    </div>
+
+    <div class="wf-flow reveal">
+      <div class="wf-flow-line"><div class="wf-flow-pulse"></div></div>
+      <div class="wf-flow-nodes">
+        <div class="wf-flow-node"><div class="wf-flow-dot mono">01</div><span class="lbl">دریافت</span></div>
+        <div class="wf-flow-node"><div class="wf-flow-dot mono">02</div><span class="lbl">تحلیل</span></div>
+        <div class="wf-flow-node"><div class="wf-flow-dot mono">03</div><span class="lbl">تصمیم</span></div>
+        <div class="wf-flow-node"><div class="wf-flow-dot mono">04</div><span class="lbl">اجرا</span></div>
+        <div class="wf-flow-node"><div class="wf-flow-dot mono">05</div><span class="lbl">بایگانی</span></div>
+      </div>
+    </div>
+
+    <div class="wf-board reveal">
+      <div class="wf-col" data-col="0">
+        <div class="wf-col-head"><h4>در صف</h4><span class="wf-col-count mono" id="wfCount0">0</span></div>
+        <div class="wf-cards" id="wfCards0"></div>
+      </div>
+      <div class="wf-col" data-col="1">
+        <div class="wf-col-head"><h4>در حال پردازش</h4><span class="wf-col-count mono" id="wfCount1">0</span></div>
+        <div class="wf-cards" id="wfCards1"></div>
+      </div>
+      <div class="wf-col" data-col="2">
+        <div class="wf-col-head"><h4>در انتظار تایید</h4><span class="wf-col-count mono" id="wfCount2">0</span></div>
+        <div class="wf-cards" id="wfCards2"></div>
+      </div>
+      <div class="wf-col" data-col="3">
+        <div class="wf-col-head"><h4>تکمیل‌شده</h4><span class="wf-col-count mono" id="wfCount3">0</span></div>
+        <div class="wf-cards" id="wfCards3"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="terms">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">// VISIT.TERMS</span>
+      <h2>شرایط ویزیت رایگان</h2>
+      <p>اولین ویزیت هزینه‌ای ندارد، اما دامنه‌ی مشخصی دارد — تا هم شما تصویر واقعی مشکل را ببینید، هم مسیر بعدی شفاف باشد.</p>
+    </div>
+    <div class="terms-grid reveal">
+      <div class="terms-col include">
+        <h3>در ویزیت رایگان انجام می‌شود</h3>
+        <ul>
+          <li>مصاحبه و شنیدن دقیق فرآیندهای فعلی سازمان</li>
+          <li>بررسی سطحی داده‌ها و ابزارهای در حال استفاده</li>
+          <li>شناسایی یک یا دو نقطه‌ی بحرانی برای بهبود با هوش مصنوعی</li>
+          <li>ارائه‌ی یک گزارش تشخیصی مکتوب و شفاف</li>
+        </ul>
+      </div>
+      <div class="terms-col exclude">
+        <h3>خارج از ویزیت رایگان است</h3>
+        <ul>
+          <li>پیاده‌سازی، توسعه یا استقرار هر راه‌حل</li>
+          <li>حضور مستمر در محل یا همراهی روزانه با تیم</li>
+          <li>اتصال به داده‌های حساس یا زیرساخت تولید</li>
+          <li>پشتیبانی، نگهداری و به‌روزرسانی پس از تحویل</li>
+        </ul>
+      </div>
+    </div>
+    <div class="terms-note reveal">
+      اگر گزارش تشخیصی نشان بدهد مشکل شما در حوزه‌ی تخصص این مطب نیست، همین‌جا صادقانه اعلام می‌شود — بدون تلاش برای فروش راه‌حلی که به کارتان نمی‌آید.
+    </div>
+  </div>
+</section>
+
+<section id="fde">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">// FDE.IMPLEMENTATION</span>
+      <h2>پیاده‌سازی به شیوه‌ی مهندسی پیشرو (FDE)</h2>
+      <p>به‌جای فروش یک محصول آماده، مهندس مستقیماً کنار تیم شما کار می‌کند تا راه‌حل را روی داده و فرآیند واقعی‌تان بسازد.</p>
+    </div>
+
+    <div class="fde-why reveal">
+      <h3>چرا این فناوری امروز ضروری است؟</h3>
+      <p>سازمان‌هایی که تصمیم، تحلیل داده و ارتباط با مشتری را دستی انجام می‌دهند، در برابر رقبایی که این فرآیندها را با هوش مصنوعی خودکار کرده‌اند، هر ماه سرعت و دقت خود را از دست می‌دهند. تأخیر در پذیرش این فناوری، هزینه‌ی پنهانی است که دیرتر و گران‌تر جبران می‌شود.</p>
+    </div>
+
+    <div class="fde-stages reveal">
+      <div class="fde-stage">
+        <span class="phase mono">PHASE / DIAGNOSE</span>
+        <h4>تشخیص</h4>
+        <p>همان ویزیت رایگان — شناخت دقیق مشکل قبل از هر پیشنهادی.</p>
+      </div>
+      <div class="fde-stage">
+        <span class="phase mono">PHASE / EMBED</span>
+        <h4>حضور و ساخت</h4>
+        <p>مهندس در کنار تیم شما، روی داده و فرآیند واقعی، راه‌حل را می‌سازد و آزمایش می‌کند.</p>
+      </div>
+      <div class="fde-stage">
+        <span class="phase mono">PHASE / SCALE</span>
+        <h4>قرارداد و توسعه</h4>
+        <p>پس از اثبات نتیجه، قرارداد بلندمدت برای استقرار کامل، نگهداری و توسعه بسته می‌شود.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="booking">
+  <div class="wrap">
+    <div class="booking reveal">
+      <h2>وقت معاینه بگیرید</h2>
+      <p>اولین جلسه، فقط گوش‌دادن و تشخیص است — نه فروش. اگر مشکل شما در تخصص این مطب نباشد، صادقانه می‌گوییم.</p>
+
+      <form class="booking-form" id="bookingForm">
+        <div class="bf-row">
+          <input type="text" id="bfName" placeholder="نام و نام سازمان" required>
+          <input type="tel" id="bfPhone" placeholder="شماره تماس" required>
+        </div>
+        <div class="bf-row">
+          <input type="email" id="bfEmail" placeholder="ایمیل (اختیاری)">
+          <select id="bfOrgType" required>
+            <option value="" disabled selected>نوع سازمان</option>
+            <option value="سازمان بزرگ / اداری">سازمان بزرگ / اداری</option>
+            <option value="شرکت خصوصی">شرکت خصوصی</option>
+            <option value="فروشگاه">فروشگاه</option>
+            <option value="نهاد آموزشی">نهاد آموزشی</option>
+            <option value="سایر">سایر</option>
+          </select>
+        </div>
+        <textarea id="bfSymptoms" placeholder="شرح مختصر مشکل یا نیاز شما..." required></textarea>
+        <input type="text" id="bfTime" placeholder="زمان ترجیحی برای تماس (مثلاً: صبح‌ها / بعدازظهر)">
+
+        <div class="bf-actions">
+          <button type="submit" class="bf-submit">ثبت درخواست ویزیت</button>
+          <button type="button" class="bf-mail" id="bfMailBtn">ارسال مستقیم به ایمیل ↗</button>
+        </div>
+        <div class="bf-success" id="bfSuccess">✓ درخواست شما ثبت شد. به‌زودی با شما تماس گرفته می‌شود.</div>
+      </form>
+
+      <button class="bf-admin-toggle" id="bfAdminToggle">VIEW STORED REQUESTS (ON THIS BROWSER)</button>
+      <div class="bf-admin" id="bfAdmin">
+        <div id="bfAdminContent"></div>
+        <div class="bf-admin-actions">
+          <button id="bfExportBtn">خروجی CSV</button>
+          <button id="bfClearBtn">پاک کردن همه</button>
+        </div>
+      </div>
+
+      <a href="https://instagram.com/Dr.behrooz.zia" target="_blank" class="btn btn-ghost" style="margin-top:22px; border-color:rgba(255,255,255,0.25); color:#fff;">یا از طریق اینستاگرام →</a>
+      <div class="insta">@Dr.behrooz.zia — Ahvaz, Iran</div>
+    </div>
+  </div>
+</section>
+
+<footer>© مطب تخصصی هوش مصنوعی — دکتر بهروز ضیاء</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+  if (typeof THREE === 'undefined') {
+    document.write('<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"><\/script>');
+  }
+</script>
+<script>
+  // Ambient binary/ASCII code background
+  (function(){
+    const canvas = document.getElementById('codeBg');
+    const ctx = canvas.getContext('2d');
+    let w, h, cols, drops;
+    const chars = '01';
+    const fontSize = 15;
+
+    function setup(){
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = document.documentElement.scrollHeight;
+      cols = Math.floor(w / fontSize);
+      drops = new Array(cols).fill(0).map(()=> Math.random() * -100);
+    }
+    setup();
+    window.addEventListener('resize', setup);
+
+    function draw(){
+      ctx.clearRect(0,0,w,h);
+      ctx.font = fontSize + 'px "IBM Plex Mono", monospace';
+      for(let i=0;i<cols;i++){
+        const char = chars[Math.floor(Math.random()*chars.length)];
+        const x = i*fontSize;
+        const y = drops[i]*fontSize;
+        ctx.fillStyle = 'rgba(11,15,20,0.26)';
+        ctx.fillText(char, x, y);
+        if(y > h && Math.random() > 0.985){ drops[i] = 0; }
+        drops[i] += 0.35;
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+  })();
+
+  // Scan clock
+  let t0 = Date.now();
+  setInterval(()=>{
+    const s = Math.floor((Date.now()-t0)/1000);
+    const hh = String(Math.floor(s/3600)).padStart(2,'0');
+    const mm = String(Math.floor((s%3600)/60)).padStart(2,'0');
+    const ss = String(s%60).padStart(2,'0');
+    document.getElementById('scanClock').textContent = `${hh}:${mm}:${ss}`;
+  }, 1000);
+
+  // Reveal on scroll
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); } });
+  }, {threshold:0.15});
+  document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+  // Staggered reveal for grid children (symptoms, rx cards, fde stages)
+  document.querySelectorAll('.symptom-grid, .rx-grid, .fde-stages, .terms-grid, .de-cols .de-col').forEach(grid=>{
+    Array.from(grid.children).forEach((child, i)=>{
+      child.style.transitionDelay = (i * 0.07) + 's';
+    });
+  });
+
+  // Nav shadow + scroll progress bar
+  const navEl = document.querySelector('nav');
+  const progressEl = document.getElementById('scrollProgress');
+  window.addEventListener('scroll', ()=>{
+    const scrolled = window.scrollY;
+    navEl.classList.toggle('scrolled', scrolled > 12);
+    const docH = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docH > 0 ? (scrolled / docH) * 100 : 0;
+    progressEl.style.width = pct + '%';
+  }, {passive:true});
+
+  // Subtle parallax on hero scan box
+  const scanBoxEl = document.getElementById('scanBox');
+  window.addEventListener('scroll', ()=>{
+    const y = Math.min(window.scrollY, 500);
+    scanBoxEl.style.transform = `translateY(${y * 0.08}px)`;
+  }, {passive:true});
+
+  // Count-up animation for vitals
+  const vitalValues = document.querySelectorAll('.vital .value');
+  const vitalTargets = ['98.2%','+40 CASE','~ 90D'];
+  let vitalsAnimated = false;
+  const vitalsObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting && !vitalsAnimated){
+        vitalsAnimated = true;
+        const el = vitalValues[0];
+        let n = 0;
+        const iv = setInterval(()=>{
+          n += 4.5;
+          if(n >= 98.2){ n = 98.2; clearInterval(iv); }
+          el.textContent = n.toFixed(1) + '%';
+        }, 30);
+      }
+    });
+  }, {threshold:0.5});
+  if(vitalValues.length) vitalsObserver.observe(vitalValues[0]);
+
+  // Booking form: localStorage + CSV export + mailto
+  (function(){
+    const form = document.getElementById('bookingForm');
+    if(!form) return;
+    const STORAGE_KEY = 'aiClinicVisitRequests';
+    const CLINIC_EMAIL = 'goodmard@gmail.com';
+    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xvkozpyb';
+
+    function getRequests(){
+      try{ return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+      catch(e){ return []; }
+    }
+    function saveRequests(list){
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+    }
+    function currentFormData(){
+      return {
+        name: document.getElementById('bfName').value.trim(),
+        phone: document.getElementById('bfPhone').value.trim(),
+        email: document.getElementById('bfEmail').value.trim(),
+        orgType: document.getElementById('bfOrgType').value,
+        symptoms: document.getElementById('bfSymptoms').value.trim(),
+        time: document.getElementById('bfTime').value.trim(),
+        date: new Date().toLocaleString('fa-IR')
+      };
+    }
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      const data = currentFormData();
+      const list = getRequests();
+      list.push(data);
+      saveRequests(list);
+
+      // Send to Formspree if configured (centralized storage for all visitors)
+      if(FORMSPREE_ENDPOINT){
+        fetch(FORMSPREE_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(data)
+        }).catch(()=>{ /* silent fail — local copy already saved */ });
+      }
+
+      document.getElementById('bfSuccess').classList.add('show');
+      form.reset();
+      renderAdmin();
+      setTimeout(()=>{ document.getElementById('bfSuccess').classList.remove('show'); }, 5000);
+    });
+
+    document.getElementById('bfMailBtn').addEventListener('click', function(){
+      const data = currentFormData();
+      const subject = encodeURIComponent('درخواست ویزیت جدید - ' + (data.name || 'بدون نام'));
+      const body = encodeURIComponent(
+        `نام: ${data.name}\nتماس: ${data.phone}\nایمیل: ${data.email}\nنوع سازمان: ${data.orgType}\nزمان ترجیحی: ${data.time}\n\nشرح مشکل:\n${data.symptoms}`
+      );
+      window.location.href = `mailto:${CLINIC_EMAIL}?subject=${subject}&body=${body}`;
+    });
+
+    // Admin panel
+    const adminToggle = document.getElementById('bfAdminToggle');
+    const adminPanel = document.getElementById('bfAdmin');
+    const adminContent = document.getElementById('bfAdminContent');
+
+    function renderAdmin(){
+      const list = getRequests();
+      adminToggle.textContent = `VIEW STORED REQUESTS (${list.length})`;
+      if(!list.length){
+        adminContent.innerHTML = '<div class="bf-empty">هنوز درخواستی روی این مرورگر ثبت نشده است.</div>';
+        return;
+      }
+      let rows = list.map((r,i)=>`
+        <tr>
+          <td>${i+1}</td>
+          <td>${r.name||'-'}</td>
+          <td>${r.phone||'-'}</td>
+          <td>${r.orgType||'-'}</td>
+          <td>${r.date||'-'}</td>
+        </tr>`).join('');
+      adminContent.innerHTML = `<table><thead><tr><th>#</th><th>نام</th><th>تماس</th><th>نوع سازمان</th><th>تاریخ</th></tr></thead><tbody>${rows}</tbody></table>`;
+    }
+    renderAdmin();
+
+    adminToggle.addEventListener('click', ()=>{
+      adminPanel.classList.toggle('show');
+    });
+
+    document.getElementById('bfExportBtn').addEventListener('click', ()=>{
+      const list = getRequests();
+      if(!list.length) return;
+      const header = ['نام','تماس','ایمیل','نوع سازمان','زمان ترجیحی','شرح مشکل','تاریخ'];
+      const rows = list.map(r=>[r.name,r.phone,r.email,r.orgType,r.time,(r.symptoms||'').replace(/\n/g,' '),r.date]);
+      const csv = [header, ...rows].map(row=>row.map(v=>`"${(v||'').toString().replace(/"/g,'""')}"`).join(',')).join('\n');
+      const blob = new Blob(['\uFEFF'+csv], {type:'text/csv;charset=utf-8;'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'visit-requests.csv';
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    document.getElementById('bfClearBtn').addEventListener('click', ()=>{
+      if(confirm('همه‌ی درخواست‌های ذخیره‌شده روی این مرورگر پاک شوند؟')){
+        localStorage.removeItem(STORAGE_KEY);
+        renderAdmin();
+      }
+    });
+  })();
+
+  // Live workflow / kanban simulation
+  (function(){
+    const board = document.getElementById('workflow');
+    if(!board) return;
+    const colIds = [0,1,2,3];
+    const colEls = colIds.map(i=>document.getElementById('wfCards'+i));
+    const countEls = colIds.map(i=>document.getElementById('wfCount'+i));
+    const activeEl = document.getElementById('wfActive');
+    const doneEl = document.getElementById('wfDone');
+
+    const taskPool = ['درخواست #204','فاکتور #A19','تیکت پشتیبانی #55','درخواست مرخصی','سفارش #77','بازبینی قرارداد','پرونده مشتری #12','گزارش هفتگی','درخواست بازپرداخت','تیکت #88'];
+    let taskSeq = 0;
+    let doneCount = 0;
+    // state: array of {id, label, col}
+    let tasks = [];
+
+    function makeTask(col){
+      taskSeq++;
+      const label = taskPool[Math.floor(Math.random()*taskPool.length)];
+      return { uid:'T-'+(1000+taskSeq), label, col };
+    }
+
+    // seed initial tasks
+    for(let i=0;i<3;i++) tasks.push(makeTask(0));
+    tasks.push(makeTask(1));
+    tasks.push(makeTask(2));
+
+    function render(){
+      colIds.forEach(c=>{ colEls[c].innerHTML = ''; });
+      let counts = [0,0,0,0];
+      tasks.forEach(t=>{
+        counts[t.col]++;
+        const div = document.createElement('div');
+        div.className = 'wf-card';
+        div.innerHTML = `<span class="id mono">${t.uid}</span>${t.label}`;
+        colEls[t.col].appendChild(div);
+      });
+      colIds.forEach(c=>{ countEls[c].textContent = counts[c]; });
+      activeEl.textContent = tasks.filter(t=>t.col < 3).length;
+      doneEl.textContent = doneCount;
+    }
+    render();
+
+    function step(){
+      // advance a random task that isn't done, or spawn new one
+      const movable = tasks.filter(t=>t.col < 3);
+      if(movable.length && Math.random() < 0.85){
+        const t = movable[Math.floor(Math.random()*movable.length)];
+        t.col++;
+        if(t.col === 3){ doneCount++; }
+      } else {
+        tasks.push(makeTask(0));
+      }
+      // remove completed tasks that have lingered, keep board tidy
+      const completed = tasks.filter(t=>t.col===3);
+      if(completed.length > 3){
+        const idx = tasks.indexOf(completed[0]);
+        tasks.splice(idx,1);
+      }
+      if(tasks.length < 5) tasks.push(makeTask(0));
+      render();
+    }
+
+    let wfTimer = null;
+    const wfObserver = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting && !wfTimer){ wfTimer = setInterval(step, 1900); }
+      });
+    }, {threshold:0.2});
+    wfObserver.observe(board);
+  })();
+
+  // Digital Employee workflow demo
+  (function(){
+    const manualSteps = document.querySelectorAll('.de-col.manual .de-step');
+    const aiSteps = document.querySelectorAll('.de-col.ai .de-step');
+    const playBtn = document.getElementById('dePlayBtn');
+    const playText = document.getElementById('dePlayText');
+    const pd = document.getElementById('dePd');
+    if(!manualSteps.length) return;
+
+    let idx = 0, playing = true, timer = null;
+
+    function setActive(i){
+      manualSteps.forEach(s=>s.classList.remove('active'));
+      aiSteps.forEach(s=>s.classList.remove('active'));
+      manualSteps[i].classList.add('active');
+      aiSteps[i].classList.add('active');
+    }
+    function tick(){
+      setActive(idx);
+      idx = (idx + 1) % manualSteps.length;
+    }
+    function start(){
+      tick();
+      timer = setInterval(tick, 1600);
+      playing = true;
+      playText.textContent = 'در حال پخش دمو';
+      pd.style.background = 'var(--teal)';
+    }
+    function stop(){
+      clearInterval(timer);
+      playing = false;
+      playText.textContent = 'ادامه دمو';
+      pd.style.background = 'var(--coral)';
+    }
+    playBtn.addEventListener('click', ()=>{ playing ? stop() : start(); });
+
+    // start when section enters view
+    const deObserver = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting && !timer){ start(); }
+      });
+    }, {threshold:0.3});
+    deObserver.observe(document.getElementById('digital-employee'));
+
+    // animate comparison bars once
+    const barObserver = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          document.getElementById('deBarManual').style.width = '100%';
+          document.getElementById('deBarAi').style.width = (2/78*100) + '%';
+          barObserver.disconnect();
+        }
+      });
+    }, {threshold:0.4});
+    barObserver.observe(document.querySelector('.de-bars'));
+  })();
+
+  // 3D neural scan visual
+  (function(){
+    if (typeof THREE === 'undefined') {
+      // Graceful fallback: no 3D library available (offline / CDN blocked)
+      const el = document.getElementById('scanBox');
+      if (el) {
+        el.style.display = 'flex';
+        el.style.alignItems = 'center';
+        el.style.justifyContent = 'center';
+        el.insertAdjacentHTML('beforeend', '<div class="mono" style="color:#00E5C7;font-size:12px;text-align:center;padding:20px;">SCAN OFFLINE<br><span style="color:#5B6B7A;">اتصال اینترنت برای بارگذاری گرافیک سه‌بعدی لازم است</span></div>');
+      }
+      return;
+    }
+    const container = document.getElementById('scanBox');
+    let w = container.clientWidth, h = container.clientHeight;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, w/h, 0.1, 100);
+    camera.position.set(0,0,6);
+
+    const renderer = new THREE.WebGLRenderer({antialias:true, alpha:true});
+    renderer.setSize(w,h);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+    container.appendChild(renderer.domElement);
+    renderer.domElement.style.position='absolute';
+    renderer.domElement.style.inset='0';
+
+    // Wireframe neural core
+    const coreGeo = new THREE.IcosahedronGeometry(1.7, 2);
+    const coreMat = new THREE.MeshBasicMaterial({color:0x00E5C7, wireframe:true, transparent:true, opacity:0.55});
+    const core = new THREE.Mesh(coreGeo, coreMat);
+    scene.add(core);
+
+    const innerGeo = new THREE.IcosahedronGeometry(1.0, 1);
+    const innerMat = new THREE.MeshBasicMaterial({color:0x6C5CE7, wireframe:true, transparent:true, opacity:0.4});
+    const inner = new THREE.Mesh(innerGeo, innerMat);
+    scene.add(inner);
+
+    // Synapse particles
+    const particleCount = 140;
+    const positions = new Float32Array(particleCount*3);
+    for(let i=0;i<particleCount;i++){
+      const r = 2.4 + Math.random()*0.9;
+      const theta = Math.random()*Math.PI*2;
+      const phi = Math.acos((Math.random()*2)-1);
+      positions[i*3] = r*Math.sin(phi)*Math.cos(theta);
+      positions[i*3+1] = r*Math.sin(phi)*Math.sin(theta);
+      positions[i*3+2] = r*Math.cos(phi);
+    }
+    const pGeo = new THREE.BufferGeometry();
+    pGeo.setAttribute('position', new THREE.BufferAttribute(positions,3));
+    const pMat = new THREE.PointsMaterial({color:0x00E5C7, size:0.035, transparent:true, opacity:0.8});
+    const particles = new THREE.Points(pGeo, pMat);
+    scene.add(particles);
+
+    function onResize(){
+      w = container.clientWidth; h = container.clientHeight;
+      camera.aspect = w/h; camera.updateProjectionMatrix();
+      renderer.setSize(w,h);
+    }
+    window.addEventListener('resize', onResize);
+
+    function animate(){
+      requestAnimationFrame(animate);
+      core.rotation.y += 0.0035;
+      core.rotation.x += 0.0012;
+      inner.rotation.y -= 0.005;
+      particles.rotation.y += 0.0018;
+      renderer.render(scene, camera);
+    }
+    animate();
+  })();
+</script>
+</body>
+</html>
