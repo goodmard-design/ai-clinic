@@ -411,6 +411,19 @@
   }
   .bf-success.show{ display:block; }
 
+  .bf-payment-info{
+    display:none; margin-top:2px; background:rgba(0,201,167,0.08); border:1px solid rgba(0,201,167,0.3);
+    border-radius:14px; padding:20px 22px;
+  }
+  .bf-payment-info.show{ display:block; }
+  .bf-payment-title{ font-size:14.5px; font-weight:700; color:var(--teal); margin-bottom:10px; }
+  .bf-payment-info p{ font-size:13.5px; color:rgba(255,255,255,0.75); line-height:1.9; margin-bottom:14px; }
+  .bf-card-number{
+    font-size:19px; font-weight:700; color:#fff; letter-spacing:2px; direction:ltr; text-align:center;
+    background:rgba(255,255,255,0.07); border-radius:10px; padding:12px; margin-bottom:8px;
+  }
+  .bf-card-owner{ font-size:12.5px; color:rgba(255,255,255,0.55); text-align:center; }
+
   .bf-admin-toggle{
     margin-top:20px; background:none; border:none; color:rgba(255,255,255,0.45); font-size:12.5px; cursor:pointer;
     text-decoration:underline; font-family:'IBM Plex Mono',monospace; direction:ltr;
@@ -822,11 +835,11 @@
     <div class="sec-head reveal">
       <span class="sec-tag">// VISIT.TERMS</span>
       <h2>شرایط ویزیت رایگان</h2>
-      <p>اولین ویزیت هزینه‌ای ندارد، اما دامنه‌ی مشخصی دارد — تا هم شما تصویر واقعی مشکل را ببینید، هم مسیر بعدی شفاف باشد.</p>
+      <p>ویزیت اول به‌صورت <b>غیرحضوری</b> (تلفنی/آنلاین) همیشه رایگان است. اگر بعد از آن به بازدید حضوری کارشناس در محل نیاز باشد، به‌دلیل هزینه‌ی ایاب‌وذهاب و زمان، هماهنگی و پرداخت جداگانه دارد.</p>
     </div>
     <div class="terms-grid reveal">
       <div class="terms-col include">
-        <h3>در ویزیت رایگان انجام می‌شود</h3>
+        <h3>در ویزیت غیرحضوری رایگان انجام می‌شود</h3>
         <ul>
           <li>مصاحبه و شنیدن دقیق فرآیندهای فعلی سازمان</li>
           <li>بررسی سطحی داده‌ها و ابزارهای در حال استفاده</li>
@@ -835,10 +848,10 @@
         </ul>
       </div>
       <div class="terms-col exclude">
-        <h3>خارج از ویزیت رایگان است</h3>
+        <h3>خارج از ویزیت غیرحضوری رایگان است</h3>
         <ul>
+          <li>بازدید حضوری کارشناس در محل سازمان (نیازمند هزینه‌ی ایاب‌وذهاب)</li>
           <li>پیاده‌سازی، توسعه یا استقرار هر راه‌حل</li>
-          <li>حضور مستمر در محل یا همراهی روزانه با تیم</li>
           <li>اتصال به داده‌های حساس یا زیرساخت تولید</li>
           <li>پشتیبانی، نگهداری و به‌روزرسانی پس از تحویل</li>
         </ul>
@@ -887,7 +900,7 @@
   <div class="wrap">
     <div class="booking reveal">
       <h2>وقت معاینه بگیرید</h2>
-      <p>اولین جلسه، فقط گوش‌دادن و تشخیص است — نه فروش. اگر مشکل شما در تخصص این مطب نباشد، صادقانه می‌گوییم.</p>
+      <p>مشاوره‌ی غیرحضوری همیشه رایگان است. بازدید حضوری کارشناس، به‌دلیل هزینه‌ی ایاب‌وذهاب و زمان، نیازمند هماهنگی و پرداخت است.</p>
 
       <form class="booking-form" id="bookingForm">
         <div class="bf-row">
@@ -905,6 +918,19 @@
             <option value="سایر">سایر</option>
           </select>
         </div>
+        <select id="bfVisitType" required>
+          <option value="" disabled selected>نوع مشاوره</option>
+          <option value="غیرحضوری (رایگان)">غیرحضوری — تلفنی/آنلاین (رایگان)</option>
+          <option value="حضوری (نیازمند هزینه)">حضوری — بازدید کارشناس در محل (نیازمند هزینه)</option>
+        </select>
+
+        <div class="bf-payment-info" id="bfPaymentInfo">
+          <div class="bf-payment-title">💳 اطلاعات واریز بازدید حضوری</div>
+          <p>برای رزرو قطعی بازدید حضوری، مبلغ <b>۱,۰۰۰,۰۰۰ تومان</b> (هزینه‌ی ایاب‌وذهاب و زمان کارشناس) به شماره‌کارت زیر واریز کنید و تصویر رسید را همراه فرم ارسال نمایید. پس از تایید پرداخت، زمان دقیق بازدید هماهنگ می‌شود.</p>
+          <div class="bf-card-number mono">5859 8318 0133 3039</div>
+          <div class="bf-card-owner">بانک تجارت — به نام بهروز ضیاء</div>
+        </div>
+
         <textarea id="bfSymptoms" placeholder="شرح مختصر مشکل یا نیاز شما..." required></textarea>
         <input type="text" id="bfTime" placeholder="زمان ترجیحی برای تماس (مثلاً: صبح‌ها / بعدازظهر)">
 
@@ -1059,11 +1085,19 @@
         _replyto: emailVal,
         _subject: 'درخواست ویزیت جدید - ' + (nameVal || 'بدون نام'),
         orgType: document.getElementById('bfOrgType').value,
+        visitType: document.getElementById('bfVisitType').value,
         symptoms: document.getElementById('bfSymptoms').value.trim(),
         time: document.getElementById('bfTime').value.trim(),
         date: new Date().toLocaleString('fa-IR')
       };
     }
+
+    // Show/hide payment info based on visit type
+    const visitTypeSelect = document.getElementById('bfVisitType');
+    const paymentInfo = document.getElementById('bfPaymentInfo');
+    visitTypeSelect.addEventListener('change', ()=>{
+      paymentInfo.classList.toggle('show', visitTypeSelect.value.startsWith('حضوری'));
+    });
 
     form.addEventListener('submit', function(e){
       e.preventDefault();
@@ -1081,10 +1115,17 @@
         }).catch(()=>{ /* silent fail — local copy already saved */ });
       }
 
-      document.getElementById('bfSuccess').classList.add('show');
+      const successEl = document.getElementById('bfSuccess');
+      if(data.visitType && data.visitType.startsWith('حضوری')){
+        successEl.innerHTML = '✓ درخواست شما ثبت شد. لطفاً مبلغ واریزی و رسید را طبق اطلاعات بالا ارسال کنید تا زمان دقیق بازدید هماهنگ شود.';
+      } else {
+        successEl.innerHTML = '✓ درخواست شما ثبت شد. به‌زودی با شما تماس گرفته می‌شود.';
+      }
+      successEl.classList.add('show');
       form.reset();
+      paymentInfo.classList.remove('show');
       renderAdmin();
-      setTimeout(()=>{ document.getElementById('bfSuccess').classList.remove('show'); }, 5000);
+      setTimeout(()=>{ successEl.classList.remove('show'); }, 8000);
     });
 
     document.getElementById('bfMailBtn').addEventListener('click', function(){
@@ -1114,9 +1155,10 @@
           <td>${r.name||'-'}</td>
           <td>${r.phone||'-'}</td>
           <td>${r.orgType||'-'}</td>
+          <td>${r.visitType||'-'}</td>
           <td>${r.date||'-'}</td>
         </tr>`).join('');
-      adminContent.innerHTML = `<table><thead><tr><th>#</th><th>نام</th><th>تماس</th><th>نوع سازمان</th><th>تاریخ</th></tr></thead><tbody>${rows}</tbody></table>`;
+      adminContent.innerHTML = `<table><thead><tr><th>#</th><th>نام</th><th>تماس</th><th>نوع سازمان</th><th>نوع مشاوره</th><th>تاریخ</th></tr></thead><tbody>${rows}</tbody></table>`;
     }
     renderAdmin();
 
@@ -1127,8 +1169,8 @@
     document.getElementById('bfExportBtn').addEventListener('click', ()=>{
       const list = getRequests();
       if(!list.length) return;
-      const header = ['نام','تماس','ایمیل','نوع سازمان','زمان ترجیحی','شرح مشکل','تاریخ'];
-      const rows = list.map(r=>[r.name,r.phone,r.email,r.orgType,r.time,(r.symptoms||'').replace(/\n/g,' '),r.date]);
+      const header = ['نام','تماس','ایمیل','نوع سازمان','نوع مشاوره','زمان ترجیحی','شرح مشکل','تاریخ'];
+      const rows = list.map(r=>[r.name,r.phone,r.email,r.orgType,r.visitType,r.time,(r.symptoms||'').replace(/\n/g,' '),r.date]);
       const csv = [header, ...rows].map(row=>row.map(v=>`"${(v||'').toString().replace(/"/g,'""')}"`).join(',')).join('\n');
       const blob = new Blob(['\uFEFF'+csv], {type:'text/csv;charset=utf-8;'});
       const url = URL.createObjectURL(blob);
